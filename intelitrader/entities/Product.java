@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import intelitrader.exception.SystemException;
 import intelitrader.resources.ProductResources;
 
 public class Product implements ProductResources {
@@ -78,14 +79,17 @@ public class Product implements ProductResources {
 				Integer quantityMinCo = Integer.parseInt(fields[2]);
 
 				products.add(new Product(id, quantityInventory, quantityMinCo));
+			
+
 				line = br.readLine();
 
 			}
 		} catch (IOException e) {
-			System.out.println("Error captured: " + e.getMessage());
+			throw new SystemException("Error captured: could not read specified file");
 		} finally {
 			System.out.println(pathProducts + " was read successfuly!");
 		}
 
 	}
+
 }

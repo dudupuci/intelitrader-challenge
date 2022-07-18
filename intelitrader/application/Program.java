@@ -27,6 +27,14 @@ public class Program {
 		Order o = new Order();
 		o.readOrders(pathSales, orders);
 
+		// GERAR UM ARQUIVO COM
+		// Produto | QntdCentroOperacional | QntdMinimaCo | QtndVendas |
+		// EstoqueApósVendas | Necess.TransferenciaP/Co
+		// transfere.txt
+
+		// products.forEach(System.out::println);
+		orders.forEach(System.out::println);
+
 		read.close();
 	}
 

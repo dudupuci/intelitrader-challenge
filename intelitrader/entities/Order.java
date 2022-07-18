@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import intelitrader.exception.SystemException;
 import intelitrader.resources.OrderResources;
 
 public class Order extends Product implements OrderResources {
@@ -76,7 +77,7 @@ public class Order extends Product implements OrderResources {
 
 	@Override
 	public void readOrders(String pathOrders, List<Order> orders) {
-
+		double sum = 0.0;
 		try (BufferedReader br = new BufferedReader(new FileReader(pathOrders))) {
 			String line = br.readLine();
 
@@ -88,13 +89,20 @@ public class Order extends Product implements OrderResources {
 				Integer channel = Integer.parseInt(fields[3]);
 
 				orders.add(new Order(productId, soldAmount, status, channel));
+				
+				if (productId == 16320 && status == 100 || productId == 16320 && status == 102) {
+					sum = sum + soldAmount;
+				}
+				
 
 				line = br.readLine();
 			}
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			throw new SystemException("Error captured: could not read specified file.");
 		} finally {
 			System.out.println(pathOrders + " was read successfully!");
+			// QUANTIDADE DE VENDAS (TEST);
+			System.out.println("Code 16320 sum : "+sum);
 		}
 
 	}
