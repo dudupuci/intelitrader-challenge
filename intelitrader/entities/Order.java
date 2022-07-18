@@ -1,32 +1,35 @@
 package intelitrader.entities;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
-import intelitrader.enums.SalesChannel;
-import intelitrader.enums.Status;
+import intelitrader.resources.OrderResources;
 
-public class Order extends Product {
+public class Order extends Product implements OrderResources {
 
-	private Product productId;
+	private Long productId;
 	private Integer soldAmount;
-	private Status status;
-	private SalesChannel channel;
+	private Integer status;
+	private Integer channel;
 
 	public Order() {
 	}
 
-	public Order(Product productId, Integer soldAmount, Status status, SalesChannel channel) {
+	public Order(Long productId, Integer soldAmount, Integer status, Integer channel) {
 		this.productId = productId;
 		this.soldAmount = soldAmount;
 		this.status = status;
 		this.channel = channel;
 	}
 
-	public Product getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(Product productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
@@ -38,19 +41,19 @@ public class Order extends Product {
 		this.soldAmount = soldAmount;
 	}
 
-	public Status getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public SalesChannel getChannel() {
+	public Integer getChannel() {
 		return channel;
 	}
 
-	public void setChannel(SalesChannel channel) {
+	public void setChannel(Integer channel) {
 		this.channel = channel;
 	}
 
@@ -69,6 +72,35 @@ public class Order extends Product {
 			return false;
 		Order other = (Order) obj;
 		return Objects.equals(productId, other.productId);
+	}
+
+	@Override
+	public void readOrders(String path, List<Order> orders) {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			String line = br.readLine();
+
+			while (line != null) {
+				String fields[] = line.split(";");
+				Long productId = Long.parseLong(fields[0]);
+				Integer soldAmount = Integer.parseInt(fields[1]);
+				Integer status = Integer.parseInt(fields[2]);
+				Integer channel = Integer.parseInt(fields[3]);
+
+				orders.add(new Order(productId, soldAmount, status, channel));
+
+				line = br.readLine();
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		return "Order [productId=" + productId + ", soldAmount=" + soldAmount + ", status=" + status + ", channel="
+				+ channel + "]";
 	}
 
 }

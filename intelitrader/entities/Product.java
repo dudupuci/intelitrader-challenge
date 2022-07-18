@@ -1,8 +1,13 @@
 package intelitrader.entities;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.List;
 import java.util.Objects;
 
-public class Product {
+import intelitrader.resources.ProductResources;
+
+public class Product implements ProductResources  {
 
 	// Primary key.
 	private Long id;
@@ -55,4 +60,31 @@ public class Product {
 		return Objects.equals(id, other.id);
 	}
 
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", quantityInventory=" + quantityInventory + ", quantityMinCo=" + quantityMinCo
+				+ "]";
+	}
+
+	
+	 @Override 
+	 public void readProducts(String pathProducts, List<Product> products) {
+	 	try (BufferedReader br = new BufferedReader(new FileReader(pathProducts))) {
+			String line = br.readLine();
+			while (line != null) {
+				String fields[] = line.split(";");
+				Long id = Long.parseLong(fields[0]);
+				Integer quantityInventory = Integer.parseInt(fields[1]);
+				Integer quantityMinCo = Integer.parseInt(fields[2]);
+				
+				products.add(new Product(id, quantityInventory, quantityMinCo));
+				line = br.readLine();
+			}
+		} catch (Exception e) {
+			System.out.println("Error captured: " + e.getMessage());
+		}
+	 	
+	
+	 
+	 }
 }
