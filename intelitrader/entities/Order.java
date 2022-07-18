@@ -77,7 +77,11 @@ public class Order extends Product implements OrderResources {
 
 	@Override
 	public void readOrders(String pathOrders, List<Order> orders) {
-		double sum = 0.0;
+		double sum16320 = 0.0;
+		double sum23400 = 0.0;
+		double sum26440 = 0.0;
+		double sum28790 = 0.0;
+		double sum36540 = 0.0;
 		try (BufferedReader br = new BufferedReader(new FileReader(pathOrders))) {
 			String line = br.readLine();
 
@@ -89,11 +93,18 @@ public class Order extends Product implements OrderResources {
 				Integer channel = Integer.parseInt(fields[3]);
 
 				orders.add(new Order(productId, soldAmount, status, channel));
-				
+
 				if (productId == 16320 && status == 100 || productId == 16320 && status == 102) {
-					sum = sum + soldAmount;
+					sum16320 = sum16320 + soldAmount;
+				} else if (productId == 23400 && status == 100 || productId == 23400 && status == 102) {
+					sum23400 = sum23400 + soldAmount;
+				} else if (productId == 26440 && status == 100 || productId == 26440 && status == 102) {
+					sum26440 = sum26440 + soldAmount;
+				} else if (productId == 28790 && status == 100 || productId == 28790 && status == 102) {
+					sum28790 = sum28790 + soldAmount;
+				} else if (productId == 36540 && status == 100 || productId == 36540 && status == 102) {
+					sum36540 = sum36540 + soldAmount;
 				}
-				
 
 				line = br.readLine();
 			}
@@ -102,7 +113,11 @@ public class Order extends Product implements OrderResources {
 		} finally {
 			System.out.println(pathOrders + " was read successfully!");
 			// QUANTIDADE DE VENDAS (TEST);
-			System.out.println("Code 16320 sum : "+sum);
+			System.out.println("Code 16320 sum : " + sum16320);
+			System.out.println("Code 23400 sum : " + sum23400);
+			System.out.println("Code 26440 sum :" + sum26440);
+			System.out.println("Code 28790 sum :" + sum28790);
+			System.out.println("Code 36540 sum : " + sum36540);
 		}
 
 	}
