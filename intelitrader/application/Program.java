@@ -23,18 +23,9 @@ public class Program {
 		// Reading products informations
 		Product p = new Product();
 		p.readProducts(pathProducts, products);
-
+		// Reading orders informations
 		Order o = new Order();
 		o.readOrders(pathSales, orders);
-
-		System.out.println("TESTE");
-		for (Order x : orders) {
-			System.out.println(x);
-		}
-		
-		for (Product x : products) {
-			System.out.println(x);
-		}
 
 		read.close();
 	}

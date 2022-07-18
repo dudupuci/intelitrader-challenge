@@ -75,9 +75,9 @@ public class Order extends Product implements OrderResources {
 	}
 
 	@Override
-	public void readOrders(String path, List<Order> orders) {
+	public void readOrders(String pathOrders, List<Order> orders) {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(pathOrders))) {
 			String line = br.readLine();
 
 			while (line != null) {
@@ -93,6 +93,8 @@ public class Order extends Product implements OrderResources {
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			System.out.println(pathOrders + " was read successfully!");
 		}
 
 	}
