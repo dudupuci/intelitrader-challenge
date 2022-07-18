@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import intelitrader.entities.Order;
+import intelitrader.entities.Sale;
 import intelitrader.entities.Product;
 
 public class Program {
@@ -17,15 +17,15 @@ public class Program {
 		List<Product> products = new ArrayList<>();
 		String pathProducts = "C:\\Users\\HP\\eclipse-workspace\\intelitrader\\produtos.txt";
 		// Sales informations
-		List<Order> orders = new ArrayList<>();
+		List<Sale> orders = new ArrayList<>();
 		String pathSales = "C:\\Users\\HP\\eclipse-workspace\\intelitrader\\vendas.txt";
 
 		// Reading products informations
 		Product p = new Product();
 		p.readProducts(pathProducts, products);
 		// Reading orders informations
-		Order o = new Order();
-		o.readOrders(pathSales, orders);
+		Sale s = new Sale();
+		s.readOrders(pathSales, orders);
 
 		// GERAR UM ARQUIVO COM
 		// Produto | QntdCentroOperacional | QntdMinimaCo | QtndVendas |

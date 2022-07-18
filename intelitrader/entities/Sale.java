@@ -9,17 +9,17 @@ import java.util.Objects;
 import intelitrader.exception.SystemException;
 import intelitrader.resources.OrderResources;
 
-public class Order extends Product implements OrderResources {
+public class Sale extends Product implements OrderResources {
 
 	private Long productId;
 	private Integer soldAmount;
 	private Integer status;
 	private Integer channel;
 
-	public Order() {
+	public Sale() {
 	}
 
-	public Order(Long productId, Integer soldAmount, Integer status, Integer channel) {
+	public Sale(Long productId, Integer soldAmount, Integer status, Integer channel) {
 		this.productId = productId;
 		this.soldAmount = soldAmount;
 		this.status = status;
@@ -71,12 +71,12 @@ public class Order extends Product implements OrderResources {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Order other = (Order) obj;
+		Sale other = (Sale) obj;
 		return Objects.equals(productId, other.productId);
 	}
 
 	@Override
-	public void readOrders(String pathOrders, List<Order> orders) {
+	public void readOrders(String pathOrders, List<Sale> orders) {
 		double sum16320 = 0.0;
 		double sum23400 = 0.0;
 		double sum26440 = 0.0;
@@ -92,7 +92,7 @@ public class Order extends Product implements OrderResources {
 				Integer status = Integer.parseInt(fields[2]);
 				Integer channel = Integer.parseInt(fields[3]);
 
-				orders.add(new Order(productId, soldAmount, status, channel));
+				orders.add(new Sale(productId, soldAmount, status, channel));
 
 				if (productId == 16320 && status == 100 || productId == 16320 && status == 102) {
 					sum16320 = sum16320 + soldAmount;
