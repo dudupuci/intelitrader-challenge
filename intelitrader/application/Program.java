@@ -30,9 +30,9 @@ public class Program {
 
 		// Reading orders informations
 		Sale s = new Sale();
-		s.readSales(pathSales, sales);
-		
-		sales.forEach(System.out::println);
+		s.readSales(pathSales, sales, products);
+
+	
 
 		read.close();
 	}

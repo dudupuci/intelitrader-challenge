@@ -76,7 +76,7 @@ public class Sale extends Product implements OrderResources {
 	}
 
 	@Override
-	public void readSales(String pathOrders, List<Sale> orders) {
+	public void readSales(String pathOrders, List<Sale> sales, List<Product> products) {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(pathOrders))) {
 
@@ -89,14 +89,41 @@ public class Sale extends Product implements OrderResources {
 				Integer status = Integer.parseInt(fields[2]);
 				Integer channel = Integer.parseInt(fields[3]);
 
-				orders.add(new Sale(productId.getId(), soldAmount, status, channel));
+				sales.add(new Sale(productId.getId(), soldAmount, status, channel));
 
 				line = br.readLine();
 			}
+
+			String pathProducts = "C:\\Users\\HP\\eclipse-workspace\\intelitrader\\produtos.txt";
+			try (BufferedReader br2 = new BufferedReader(new FileReader(pathProducts))) {
+				String line2 = br2.readLine();
+
+				while (line2 != null) {
+					String fields2[] = line2.split(";");
+					Long id = Long.parseLong(fields2[0]);
+					Integer quantityInventory = Integer.parseInt(fields2[1]);
+					Integer quantityMinCo = Integer.parseInt(fields2[2]);
+
+					products.add(new Product(id, quantityInventory, quantityMinCo));
+
+					line2 = br2.readLine();
+
+				}
+
+			} catch (IOException e) {
+				throw new SystemException("Error captured: could not read specified file.");
+			}
+
 		} catch (IOException e) {
 			throw new SystemException("Error captured: could not read specified file.");
 		} finally {
 			System.out.println(pathOrders + " was read successfully!");
+			/*for (Sale x : sales) {
+				System.out.println(x + " ,");
+			}
+			for (Product x : products) {
+				System.out.println(x);
+			}*/
 		}
 
 	}
