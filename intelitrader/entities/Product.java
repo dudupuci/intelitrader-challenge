@@ -13,7 +13,7 @@ public class Product implements ProductResources {
 
 	// Primary key.
 	private Long id;
-	private Integer quantityInventory;
+	protected Integer quantityInventory;
 	private Integer quantityMinCo;
 
 	public Product() {
@@ -23,6 +23,10 @@ public class Product implements ProductResources {
 		this.id = id;
 		this.quantityInventory = quantityInventory;
 		this.quantityMinCo = quantityMinCo;
+	}
+
+	public Product(String string, Object object, Object object2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getQuantityInventory() {
@@ -79,7 +83,6 @@ public class Product implements ProductResources {
 				Integer quantityMinCo = Integer.parseInt(fields[2]);
 
 				products.add(new Product(id, quantityInventory, quantityMinCo));
-			
 
 				line = br.readLine();
 

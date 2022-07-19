@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import intelitrader.entities.Sale;
 import intelitrader.entities.Product;
+// GERAR UM ARQUIVO COM
+// Produto | QntdCentroOperacional | QntdMinimaCo | QtndVendas | EstoqueApósVendas | Necess.TransferenciaP/Co 
+// transfere.txt
 
 public class Program {
 	public static void main(String[] args) {
@@ -16,24 +19,20 @@ public class Program {
 		// Products informations
 		List<Product> products = new ArrayList<>();
 		String pathProducts = "C:\\Users\\HP\\eclipse-workspace\\intelitrader\\produtos.txt";
+
 		// Sales informations
-		List<Sale> orders = new ArrayList<>();
+		List<Sale> sales = new ArrayList<>();
 		String pathSales = "C:\\Users\\HP\\eclipse-workspace\\intelitrader\\vendas.txt";
 
 		// Reading products informations
 		Product p = new Product();
 		p.readProducts(pathProducts, products);
+
 		// Reading orders informations
 		Sale s = new Sale();
-		s.readOrders(pathSales, orders);
-
-		// GERAR UM ARQUIVO COM
-		// Produto | QntdCentroOperacional | QntdMinimaCo | QtndVendas |
-		// EstoqueApósVendas | Necess.TransferenciaP/Co
-		// transfere.txt
-
-		// products.forEach(System.out::println);
-		orders.forEach(System.out::println);
+		s.readSales(pathSales, sales);
+		
+		sales.forEach(System.out::println);
 
 		read.close();
 	}

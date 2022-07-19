@@ -6,6 +6,6 @@ import intelitrader.entities.Sale;
 
 public interface OrderResources {
 	
-	public void readOrders(String path, List<Sale> orders);
+	public void readSales(String path, List<Sale> orders);
 
 }
