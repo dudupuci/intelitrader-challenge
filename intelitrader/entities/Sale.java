@@ -1,8 +1,10 @@
 package intelitrader.entities;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -205,10 +207,89 @@ public class Sale extends Product implements OrderResources {
 			throw new SystemException("Error captured: could not read specified file.");
 		} finally {
 			System.out.println(pathSales + " was read successfully!");
-		    // Create new file
-			
-            
-			
+			// Create new file
+			try (BufferedWriter bw = new BufferedWriter(
+					new FileWriter("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\transfere.txt", false))) {
+				// I don't need to throw an exception if the file already exists,
+				// because I'm declaring it manually
+				File file = new File("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\transfere.txt");
+				file.createNewFile();
+
+				// FIRST LINE BEGIN
+				bw.append("Produto |");
+				bw.append(" QtCo |");
+				bw.append(" QtMin |");
+				bw.append(" QtVendas |");
+				bw.append(" Estq.após Vendas |");
+				bw.append(" Necess. |");
+				bw.append(" Transf. de Arm p/ CO");
+				bw.newLine();
+				bw.write("\n 16320");
+				bw.write("    344");
+				bw.write("     200");
+				bw.write(String.valueOf("       " + sum16320));
+				bw.write(String.valueOf("           " + stock16320));
+				bw.write(String.valueOf("              " + rest16320));
+				bw.write(String.valueOf("               " + transfer16320));
+				// FIRST LINE END
+
+				// SECOND LINE BEGIN
+				bw.newLine();
+				bw.write("\n 23400");
+				bw.write("    1435");
+				bw.write("    500");
+				bw.write(String.valueOf("       " + sum23400));
+				bw.write(String.valueOf("           " + stock23400));
+				bw.write(String.valueOf("              " + rest23400));
+				bw.write(String.valueOf("               " + transfer23400));
+				// SECOND LINE END
+
+				bw.newLine();
+				bw.write("\n 26440");
+				bw.write("    2899");
+				bw.write("    800");
+				bw.write(String.valueOf("       " + sum26440));
+				bw.write(String.valueOf("          " + stock26440));
+				bw.write(String.valueOf("              " + rest26440));
+				bw.write(String.valueOf("               " + transfer26440));
+
+				bw.newLine();
+				bw.write("\n 28790");
+				bw.write("    310");
+				bw.write("     150");
+				bw.write(String.valueOf("       " + sum28790));
+				bw.write(String.valueOf("           " + stock28790));
+				bw.write(String.valueOf("              " + rest28790));
+				bw.write(String.valueOf("               " + transfer28790));
+
+				bw.newLine();
+				bw.write("\n 36540");
+				bw.write("    431");
+				bw.write("     100");
+				bw.write(String.valueOf("       " + sum36540));
+				bw.write(String.valueOf("           " + stock36540));
+				bw.write(String.valueOf("            " + rest36540));
+				bw.write(String.valueOf("              " + transfer36540));
+
+				bw.close();
+
+				System.out.println("\nDocumento criado com sucesso! (201)");
+
+				try (BufferedReader readNewFile = new BufferedReader(new FileReader(file))) {
+					String lines = readNewFile.readLine();
+
+					while (lines != null) {
+						System.out.println(lines);
+						lines = readNewFile.readLine();
+					}
+				} catch (Exception e) {
+					throw new SystemException("Error: file cannot be read.");
+				}
+
+			} catch (IOException e) {
+				throw new SystemException("Error: file not created." + e.getMessage());
+			}
+
 		}
 
 	}
