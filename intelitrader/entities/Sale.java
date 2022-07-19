@@ -74,7 +74,7 @@ public class Sale extends Product implements OrderResources {
     }
 
     @Override
-    public void readSales(String pathSales, List<Sale> sales, List<Product> products) {
+    public void readSales(String pathSales, List<Sale> sales, List<Product> products)  {
         int sum16320 = 0;
         int sum23400 = 0;
         int sum26440 = 0;
@@ -316,7 +316,7 @@ public class Sale extends Product implements OrderResources {
                 try ( BufferedWriter bwSales = new BufferedWriter(new FileWriter("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt"))) {
                     System.out.println("\n Documento de vendas por canal criado com sucesso!");
                     salesFile.createNewFile();
-                    bwSales.write("Quantidade de Vendas por canal");
+                    bwSales.write("\nQuantidade de Vendas por canal");
                     bwSales.write("\n 1 - Representantes             "+String.valueOf(sum_1));
                     bwSales.write("\n 2 - Website                    "+String.valueOf(sum_2));
                     bwSales.write("\n 3 - App móvel Android          "+String.valueOf(sum_3));
@@ -324,7 +324,20 @@ public class Sale extends Product implements OrderResources {
 
                 } catch (IOException e) {
                     throw new SystemException("Error: file cannot be created.");
+                } finally {
+                   File fileChannel = new File("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt");
+                    try (BufferedReader br = new BufferedReader(new FileReader(fileChannel))) {
+                        String line = br.readLine();
+
+                        while (line != null) {
+                            System.out.println(line);
+                            line = br.readLine();
+                        }
+                    } catch (IOException e) {
+                        throw new SystemException(""+e.getMessage());
+                    }
                 }
+
 
 
 
