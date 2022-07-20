@@ -32,7 +32,7 @@ public class Program {
 		Sale s = new Sale();
 		s.readSales(pathSales, sales, products);
 
-	
+
 
 		read.close();
 	}

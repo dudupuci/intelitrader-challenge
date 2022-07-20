@@ -6,6 +6,7 @@ import intelitrader.resources.OrderResources;
 import java.io.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Sale extends Product implements OrderResources {
 
@@ -74,7 +75,7 @@ public class Sale extends Product implements OrderResources {
     }
 
     @Override
-    public void readSales(String pathSales, List<Sale> sales, List<Product> products)  {
+    public void readSales(String pathSales, List<Sale> sales, List<Product> products) {
         int sum16320 = 0;
         int sum23400 = 0;
         int sum26440 = 0;
@@ -145,6 +146,7 @@ public class Sale extends Product implements OrderResources {
                     sum_4 = sum_4 + soldAmount;
 
                 }
+
 
                 line = br.readLine();
             }
@@ -295,7 +297,6 @@ public class Sale extends Product implements OrderResources {
                 System.out.println("\nDocumento criado com sucesso! (201)");
 
 
-
                 try (BufferedReader readNewFile = new BufferedReader(new FileReader(file))) {
                     String lines = readNewFile.readLine();
 
@@ -313,19 +314,20 @@ public class Sale extends Product implements OrderResources {
             } finally {
                 File salesFile = new File("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt");
 
-                try ( BufferedWriter bwSales = new BufferedWriter(new FileWriter("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt"))) {
+                try (BufferedWriter bwSales = new BufferedWriter(new FileWriter("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt"))) {
                     System.out.println("\n Documento de vendas por canal criado com sucesso!");
                     salesFile.createNewFile();
                     bwSales.write("\nQuantidade de Vendas por canal");
-                    bwSales.write("\n 1 - Representantes             "+String.valueOf(sum_1));
-                    bwSales.write("\n 2 - Website                    "+String.valueOf(sum_2));
-                    bwSales.write("\n 3 - App móvel Android          "+String.valueOf(sum_3));
-                    bwSales.write("\n 4 - App móvel Iphone           "+String.valueOf(sum_4));
+                    bwSales.write("\n 1 - Representantes             " + String.valueOf(sum_1));
+                    bwSales.write("\n 2 - Website                    " + String.valueOf(sum_2));
+                    bwSales.write("\n 3 - App móvel Android          " + String.valueOf(sum_3));
+                    bwSales.write("\n 4 - App móvel Iphone           " + String.valueOf(sum_4));
 
                 } catch (IOException e) {
                     throw new SystemException("Error: file cannot be created.");
                 } finally {
-                   File fileChannel = new File("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt");
+
+                    File fileChannel = new File("C:\\Users\\HP\\eclipse-workspace\\intelitrader\\totcanais.txt");
                     try (BufferedReader br = new BufferedReader(new FileReader(fileChannel))) {
                         String line = br.readLine();
 
@@ -334,12 +336,9 @@ public class Sale extends Product implements OrderResources {
                             line = br.readLine();
                         }
                     } catch (IOException e) {
-                        throw new SystemException(""+e.getMessage());
+                        throw new SystemException("" + e.getMessage());
                     }
                 }
-
-
-
 
 
             }
